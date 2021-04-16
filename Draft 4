@@ -1,0 +1,314 @@
+﻿# Declare characters used by this game. The color argument colorizes the
+# name of the character.
+
+# characters, add more as we need them
+define w1 = Character("Witness 1", color = "#ed7e00")
+define w2 = Character("Witness 2", color = "#ed2400")
+define deputy = Character("Deputy", color = "#ebc55e")
+define sheriff = Character("Sheriff", color = "#964B00")
+define yn = Character("[name]", color = "#230ac4")
+define dad = Character("Dad", color = "#dc143c")
+
+# backgrounds, make sure we all have the same image file
+image bg interrogation = im.Scale("background_interrogation.jpg", 1920, 1080)
+image bg investigation = im.Scale("background_investigationroom.jpg", 1920, 1080)
+image bg crimescene1d = im.Scale("background_crimesceneday.jpg", 1920, 1080)
+image bg crimescene1n = im.Scale("background_crimescenenight.jpg", 1920, 1080)
+image bg town = im.Scale("background_town.jpg", 1920, 1080)
+image bg town1 = im.Scale("background_townrundown.jpg", 1920, 1080)
+image bg phallway = im.Scale("background_policehallway.jpg", 1920, 1080)
+image bg lab= im.Scale("background_lab.jpg", 1920, 1080)
+image bg detectiveoffice = im.Scale("background_detectiveoffice.jpg", 1920, 1080)
+image bg landscape_one = im.Scale("background_townscene1.jpg", 1920, 1080)
+image bg black = "#000"
+
+default wenttolocation1 = False
+default wenttolocation2 = False
+default wenttolocation3 = False
+default wenttolocation4 = 1
+default justcamefrom = 0
+
+# Main menu music - Download the song I sent to discord called “Mainmenu2.mp3” and store
+# it into the audio folder in your game. Then go to “options.rpy”, scroll down to line 64, and
+#uncomment the comment there and change it to this:
+define config.main_menu_music = "audio/Mainmenu2.mp3"
+#Then go to script.rpy and do as follows below
+
+# The game starts here.
+
+label start:
+
+    #call variables
+    stop music
+
+    centered "{size=25}{b}Lakeside, Newland.\nThursday, 1999{/b}{/size}"
+
+    "The sun has set and the weekend is just around the corner."
+
+    scene bg detectiveoffice with Dissolve(0.5)
+
+
+    play sound "audio/wind.mp3"
+    "A look around shows a room full of cabinets and files. The open window let's a cool breeze blow
+    into the room."
+    "The chill is enough to make me reach into my desk drawer to try and dig out a pair of gloves. After rummaging
+    around a bit my fingers are greeted with the feel of something cold and metallic instead."
+    "In my hand is my old badge from when I worked on the force. Back before I decided to become a private eye.
+    Some crimes you just can't solve if you're limited to what the force allows."
+    "I breathe a light breath onto it and shine it off against my shirt. {w} Shiny."
+    "The low glow of the moonlight reflects against the badge."
+    stop sound fadeout 1.0
+    #I suggest we find a badge image to add here.
+
+    $name = renpy.input("What name is on the badge? ", length=32)
+    $name = name.strip()
+
+    yn "Doesn't hurt to reminisce every once in a while."
+    play sound ["audio/drawer.mp3", "audio/gloves.mp3"]
+    "I set the badge back into the drawer and put my gloves on proper. {w} Toasty."
+    stop sound
+    yn "Paperwork is almost done thankfully, might just take the day off tomorrow and make it a
+    3 day weekend. Being a private eye hasn't been 24/7 exhilarating as part of me was hoping it would be."
+    yn "Then again, I should probably be thankful people aren't all that in need of a detective. If it ever
+    turned out I {i}was{/i} needed, well…"
+    play sound "audio/phone-ring.mp3"
+    "The sound of my phone ringing jostles me. A look at the caller ID makes me curse under my breath as I
+    reach to answer."
+    #stop sound
+    yn "Just what kind of cruel irony is this?"
+
+    "{color=#964B00}Detective [name]! Boy am I thankful you're still in the office. There's a case we've been
+    working on for a while, but something troubling has come up that's made this top priority. Need all hands
+    on deck for this one!"
+
+    yn "Ahhh sheriff! And here I was hoping you wanted to catch up. No time to talk about the weather huh?
+    Cuz' I mean BOY is it a cold one!"
+
+    sheriff "I'm serious about this one [name]. I'm afraid if we don't get to the bottom of this pronto more
+    and more lives are gonna be at risk."
+
+    yn "That serious huh? Alright, I'll be there shortly and you can catch me up."
+
+    "I quickly set aside my paperwork and gather my things as I head for the door. I look back into the office
+    as I reach for the lightswitch."
+
+    yn "So much for a 3 day weekend huh?"
+
+
+    scene bg black with Dissolve(0.5)
+    scene bg phallway with Dissolve(0.5)
+
+    "I arrive at the station and the feeling of nostalgia grips at me immediately. I'm reminded of my time working
+    here, and I almost start thinking of my first day here before I see a ruffled up sheriff walking right towards
+    me."
+
+    "Unfortunately, reminiscing will have to wait, there's a job to do."
+
+    show sheriff
+    #the game should show a silhouette of an anime girl here as a placeholder for the sheriff
+
+    sheriff "[name], you made it! I tell ya, as much as I hate falling back on you and admitting I can't do this
+    on my own, I just can't do this on my own."
+
+    "He hurriedly walks me to his desk, files scattered all over it. He brushes some to the side and drops a
+    rather thinner folder in comparison in the center."
+
+    scene bg investigation with Dissolve(0.5)
+
+    "I give him a confused glance as I reach for the folder."
+
+    yn "And my briefing?"
+
+    sheriff "Yer holdin' it."
+
+    "I flip the folder open and all I see on it is a single note."
+    #An image for the note will appear here
+    "The note shows large \"X's\" on what appears to be a crudely drawn map, and some haunting words
+    accompany it below."
+    "{color=#8b0000}You have 7 days."
+
+    yn "No..."
+
+    sheriff "Unforunately that's the case. The note showed up on our doorstep, not a trace of who
+    could have left it there either."
+
+    sheriff "Soon as I confirmed it wasn't some sort of sick joke from someone here, we got to work on trying to
+    figure the thing out. Now, it brings me no pride to say this either, but that was 2 days ago, and we've hardly
+    gotten anywhere."
+
+    yn "SO THERE'S ONLY FIVE DAYS LEFT?!"
+
+    sheriff "'Fraid so. Soon as I realized I was just gonna keep pacin' in circles, I had to call on the one
+    person I could trust."
+
+    yn "Oh sheriff...{w} Well for one, I'm flattered you think of me so highly, really wouldn't hurt you to say
+     so more often."
+
+    yn "Second, {w} {i}why in the hell would you let your stupid pride stop you from reaching out for help if you
+    needed it?{i}"
+
+    sheriff "It's not exactly like that alright! I've got my people working on it, trying to gather SOME leads.
+    Only now I got to the point where I was just waiting on 'em to get back to me."
+
+    sheriff "I couldn't stand sitting idly by as the clock ticked down, so I figured I'd pull out all the
+    stops and that's when I called you in."
+
+    yn "Alright, so I've got 5 days to work with then. You said you had people on it already? Anything they
+    could give me at all?"
+
+    sheriff "Got one, my deputy. Been on the case the entire time since too. Messaged me right as you were on
+    the way sayin' he figured somethin' out about the map. You should talk to him first."
+
+    "He points down the hall towards an adjoining room."
+
+    yn "Got it."
+
+    sheriff "I'm countin' on ya [name]."
+
+    hide sheriff
+    scene bg black with Dissolve(0.5)
+    scene bg investigation with Dissolve(0.5)
+
+    "I enter the room next door, which just so happens to look identical to the last. I tell ya, the
+    station saved themselves a pretty penny by buying their furniture in bulk."
+
+    show deputy
+    #this should be an anime girl placeholder
+
+    deputy "Detective [name], I've been expecting you! Thank you so much for coming in on such short notice, I'm
+    definitely relieved to have someone so reknown on the case with us!"
+
+    yn "Pleasure to be working with you deputy! Now, figured something out about the map have you?"
+
+    deputy "That's right! After looking over and cross-referencing it with landmarks around town, I've managed
+    to pinpoint exactly where the X's are hinting to."
+
+    "The deputy pulls out a map of the town and circles four locations on it before handing it over to me."
+
+    deputy "I guarantee you those are the locations that were hinted at."
+
+    deputy "As much as I'm sure those locations are correct, I'm not sure at all what significance they may have.
+    If you do decide to go directly to any of them, you'd best be on your guard. There's no telling what you may
+    find."
+
+    yn "I appreciate it! Alright, let's see here."
+
+    "I look at the map and see what my options are..."
+
+    scene bg black with Dissolve(0.5)
+
+    #"This is the end of the intro for now! Everyone should come up with their own locations you'd like the
+    #detective to visit!"
+
+#temporary menu
+    menu:
+        "Where should I go investigate first?"
+
+        "abandoned location":
+            jump abandoned_location
+
+        "lake":
+            jump lake_location
+
+        "Library":
+            jump library_location
+
+        "The outskirts":
+            jump outskirts_location
+
+    label abandoned_location:
+        call location1 from _call_location1
+        "that was location 1. Going back to my office now."
+        $justcamefrom = 1
+
+        jump backToOffice
+    label lake_location:
+        call location2 from _call_location2
+        "that was location 2. Going back to my office now."
+        $justcamefrom = 2
+
+        jump backToOffice
+    label library_location:
+        call location3 from _call_location3
+        "that was location 3. Going back to my office now."
+        $justcamefrom = 3
+
+        jump backToOffice
+    label outskirts_location:
+        call location4 from _call_location4
+        "that was location 4."
+        $justcamefrom = 4
+
+        jump backToOffice
+
+    label backToOffice:
+
+        "I arrive back at my office to process my new findings."
+    show bg detectiveoffice with Dissolve(0.5)
+    yn "Now, what to do..."
+    "Here, the player should talk about what they just did based on the options they've taken so far."
+    if justcamefrom == 1:
+        "I went to the abandoned location and discovered something!"
+    if justcamefrom == 2:
+        "I went to the lake location and discovered something!"
+    if justcamefrom == 3:
+        "I went to the library location and discovered something!"
+    if justcamefrom == 4:
+        "I went to the outskirts location and discovered something!"
+
+    "Here a menu should appear with the same choices as the last menu. But this time without
+    the options youve already picked."
+    label everythingThatIsLeft:
+        if wenttolocation1 == True and wenttolocation2 == True and wenttolocation3 == True and wenttolocation4 == 3:
+            jump nothingLeft
+        else:
+            menu:
+                "Where should I go next?"
+
+                "The abandoned location." if wenttolocation1 == False:
+                    yn "I'm going to to the abandoned location."
+                    show bg black with Dissolve(0.5)
+                    jump abandoned_location
+
+                "The lake location." if wenttolocation2 == False:
+                    yn "I'm going to to the lake location."
+                    show bg black with Dissolve(0.5)
+                    jump lake_location
+
+                "The library location." if wenttolocation3 == False:
+                    yn "I'm going to to the library location."
+                    show bg black with Dissolve(0.5)
+                    jump library_location
+
+                "The outskirts of town." if wenttolocation4 == 1 or wenttolocation4 == 2:
+                    if wenttolocation4 == 2:
+                        "I'm gonna need a passcode to get in the lighthouse, otherwise this might be a waste of time.
+                        Should I still go?"
+                        menu:
+                            "Go to the outskirts of town?"
+
+                            "Nevermind":
+                                "Maybe I shouldn't go there for now..."
+                                jump everythingThatIsLeft
+
+                            "Yes":
+                                yn "I think I can probably get in there."
+
+                    yn "I'm going to to the outskirts location."
+                    show bg black with Dissolve(0.5)
+                    jump outskirts_location
+
+                "No need to go anywhere else!":
+                    yn "Even without clearing out every location, I'm confident I got a good idea who the crook is!"
+                    jump nothingLeft
+
+    label nothingLeft:
+        yn "I think I got all I need. Time to crack this case!"
+
+    "For now this is the end of the game."
+
+
+    return
+
+#julians label:  abandoned_location
+#maribel label: library
