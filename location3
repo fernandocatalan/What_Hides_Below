@@ -1,0 +1,91 @@
+label third_location:
+    $wenttolocation3 = True
+    #this will be Maribel's folder where she can do whatever she wants.
+
+#######Mary##########
+# characters, add more as we need them
+
+define d = Character("Detective ", color = "#230ac4")
+define A = Character("Detective", color = "#40E0D0")
+define O = Character("Officer", color = "#FF7F50")
+image Ann = im.Scale("Ann.PNG", 390, 780, xalign=0, yalign=1.0)
+image bg library = im.Scale("library1.jpg", 1920, 1080)
+image b5 = im.Scale("cruzhome.png", 1920, 1080)
+image b6 = im.Scale("objects/b6.png", 101, 84, xalign=0.83, yalign=0.33)
+
+show bg library
+# These display lines of dialogue.
+"I'm in the library, It's very quiet here. I guess I have to look for a book.
+ I don't know what exactly I am looking for. Well, I guess I have to look for
+ a book. There are many in here as you can see."
+call menu_library
+
+
+    # This ends the game.
+
+label menu_library:
+    menu:
+
+        "look aroud":
+            call look
+
+        "talk with the librarian":
+            call talk
+        "Mr. Cruz home":
+            call cruzhome
+    return
+label look:
+    show b6
+    d"After a couple hours of searching through the shelves. I found a blue
+      book with a red X on it. I found another note that says, "
+
+    d "{color=#8b0000}'Congratulation, you found my place. How do you feel by standing on
+       my collections, but don't get distracted on it.'"
+    d "{color=#8b0000} 'You don't want to waste your time in here. I am in another place enjoying
+       sometime well accompanied if you want to join us follow the X. You don't want to miss my wedding'"
+    d "I knew someone could be in danger, he has another victim. I am not only worried for how many
+       other but the new life he is planning to take. What kind of collections is he talking
+       about? In the past 3 months we have found 5 dead bodies in a plastic bag out of town."
+    d "I am horrified! All the dead bodies had the same missing finger, the ring finger. What kind of
+       sychopath is he? What kind of game is he playing? For the way he is giving me clues, he must
+       be tired of killing people, and he want me to stop him. I just wish to find him on time."
+    jump menu_library
+    return
+
+label talk:
+    show Ann
+    d "I just need to find something else. let me ask to the labrarian. I approached to her and I call her
+       for the name on her tag."
+    d "Excuseme Ann, I am detective name. I am in an investigation here. Is there another section
+       in this building?"
+    A "Yes! There is a computer lab uptairs and a basement that is been lock since I know.
+       Some employee before me used to live in the basement for long. He quit and move
+       some years ago."
+    d "Can you unlock the basement for me please?"
+    A "I don't have the keys here Sr. you have to wait till tomorrow in the morning
+       when the owner, Mr. Cruz is here"
+    d "I don't have time for tommorrow. Can I get Mr. Cruz address?"
+    A "Sure detective, anything that I can help with"
+    d "She write the address and the paper note were exactly from the same paper
+       notes the suspect is using"
+    A "He lives a couple blocks from here detective."
+
+    jump menu_library
+
+label cruzhome:
+    scene
+    show b5
+
+    d "I am driving as fast as I can to get to Mr. Cruz's home. My hands are sweating
+       just by thinking of the innocent lady who is suffering right now by the hands
+       of this psycho. I just remember some description of previews victims. They had
+       bruces as a result of punishment for fighting back. they had no signs of being
+       tide"
+    d "I believe he is keeping them in a place out of town. I just need some clue
+       where exactly is this place. this couple minutes getting to the address felt
+       like forever. I am already here, I hope I can find something more than just a key."
+    d "I was about to knock the door when Mr. Cruz open it"
+    jump menu_library
+    return
+
+
